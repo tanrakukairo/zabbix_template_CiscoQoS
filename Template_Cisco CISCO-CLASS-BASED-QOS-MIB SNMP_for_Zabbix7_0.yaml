@@ -27,7 +27,7 @@ zabbix_export:
                     - ''
               tags:
                 - tag: Application
-                  value: '{#INTERFACE}.{#QOS_IF_DIRECTION}'
+                  value: 'QoS.{#INTERFACE}.{#QOS_IF_DIRECTION}'
                 - tag: CISCO
                 - tag: QOS
                 - tag: '{#CLASS_NAME}'
@@ -53,7 +53,7 @@ zabbix_export:
                     - ''
               tags:
                 - tag: Application
-                  value: '{#INTERFACE}.{#QOS_IF_DIRECTION}'
+                  value: 'QoS.{#INTERFACE}.{#QOS_IF_DIRECTION}'
                 - tag: CISCO
                 - tag: QOS
                 - tag: '{#CLASS_NAME}'
@@ -68,7 +68,7 @@ zabbix_export:
                     - ''
               tags:
                 - tag: Application
-                  value: '{#INTERFACE}.{#QOS_IF_DIRECTION}'
+                  value: 'QoS.{#INTERFACE}.{#QOS_IF_DIRECTION}'
                 - tag: CISCO
                 - tag: QOS
                 - tag: '{#CLASS_NAME}'
@@ -83,7 +83,7 @@ zabbix_export:
                     - ''
               tags:
                 - tag: Application
-                  value: '{#INTERFACE}.{#QOS_IF_DIRECTION}'
+                  value: 'QoS.{#INTERFACE}.{#QOS_IF_DIRECTION}'
                 - tag: CISCO
                 - tag: QOS
                 - tag: '{#CLASS_NAME}'
@@ -103,7 +103,7 @@ zabbix_export:
                     - ''
               tags:
                 - tag: Application
-                  value: '{#INTERFACE}.{#QOS_IF_DIRECTION}'
+                  value: 'QoS.{#INTERFACE}.{#QOS_IF_DIRECTION}'
                 - tag: CISCO
                 - tag: QOS
                 - tag: '{#CLASS_NAME}'
@@ -123,7 +123,7 @@ zabbix_export:
                     - ''
               tags:
                 - tag: Application
-                  value: '{#INTERFACE}.{#QOS_IF_DIRECTION}'
+                  value: 'QoS.{#INTERFACE}.{#QOS_IF_DIRECTION}'
                 - tag: CISCO
                 - tag: QOS
                 - tag: '{#CLASS_NAME}'
