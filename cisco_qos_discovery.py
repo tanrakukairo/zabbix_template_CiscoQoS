@@ -12,7 +12,7 @@ QoS情報は以下のリスト形式で出力されます。[]はインデック
     {
         'index': QOS_CLASS_INDEX.INDEX[2],
         'interface': IF_NAME.VALUE,
-        'qos_direction': QOS_IF_DIRECTION.VALUE,
+        'qos_if_direction': QOS_IF_DIRECTION.VALUE,
         'class_name': QOS_CLASS_NAME.VALUE,
     }
 ]
