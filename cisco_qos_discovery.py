@@ -117,8 +117,8 @@ if __name__ == '__main__':
         print('Failed to retrieve QoS interface information.')
         exit(1)
     qos_if_direction = get_qos_info(QOS_IF_DIRECTION, 1)
-    if not qos_if:
-        print('Failed to retrieve QoS interface information.')
+    if not qos_if_direction:
+        print('Failed to retrieve QoS interface direction.')
         exit(1)
     # QoSクラス名を取得
     qos_class_name = get_qos_info(QOS_CLASS_NAME, 1)
