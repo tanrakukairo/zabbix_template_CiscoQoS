@@ -131,18 +131,32 @@ if __name__ == '__main__':
         print('Failed to retrieve QoS class index information.')
         exit(1)
     # qos_class_indexをキーにして、物理インターフェイス名とQoSクラス名を取得
-    for key, value in qos_class_index.items():
+    for lld_index, value in qos_class_index.items():
         # keyはqos_if_index.qos_class_idの構造
-        qos_if_index = key.split('.')[0]
+        qos_if_index = lld_index.split('.')[0]
         # 物理インターフェイス名のインデックスを取得
-        if_index = qos_if[qos_if_index]
+        if_index = qos_if.get(qos_if_index)
+        if not if_index:
+            continue
+        # 物理インターフェイス名を取得
+        interface = if_name.get(if_index)
+        if not interface:
+            continue
+        # QoSクラス名を取得
+        class_name = qos_class_name.get(value)
+        if not class_name:
+            continue
+        # QoSインターフェイスの方向を取得
+        direction = qos_if_direction.get(qos_if_index)
+        if not direction:
+            continue
         # 出力用の辞書を作成
         output.append(
             {
-                'index': key,
-                'interface': if_name[if_index],
-                'qos_if_direction': 'IN' if qos_if_direction[qos_if_index] == '1' else 'OUT',
-                'class_name': qos_class_name[value],
+                'index': lld_index,
+                'interface': interface,
+                'qos_if_direction': 'IN' if direction == '1' else 'OUT',
+                'class_name': class_name,
             }
         )
     # JSON形式で出力
