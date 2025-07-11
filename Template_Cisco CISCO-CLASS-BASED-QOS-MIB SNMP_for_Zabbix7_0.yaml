@@ -21,7 +21,6 @@ zabbix_export:
               type: SNMP_AGENT
               snmp_oid: 'get[.1.3.6.1.4.1.9.9.166.1.15.1.1.14.{#INDEX}]'
               key: 'cisco.qos[{#INDEX},{#CLASS_NAME},drop]'
-              units: pps
               preprocessing:
                 - type: SIMPLE_CHANGE
                   parameters:
@@ -35,7 +34,7 @@ zabbix_export:
               trigger_prototypes:
                 - uuid: 9e6e51c22c33415f960c8398eb058cc9
                   expression: 'last(/Cisco CISCO-CLASS-BASED-QOS-MIB SNMP/cisco.qos[{#INDEX},{#CLASS_NAME},drop])>{$QOS_DROP}'
-                  name: '[Cisco][QoS][{#INTERFACE}.{#QOS_IF_INDEX}] {#CLASS_NAME} Drop packets > {$QOS_DROP}'
+                  name: '[Cisco][QoS][{#INTERFACE}][{#QOS_IF_DIRECTION}] {#CLASS_NAME} Drop packets > {$QOS_DROP}'
                   priority: AVERAGE
                   manual_close: 'YES'
                   tags:
@@ -43,12 +42,41 @@ zabbix_export:
                     - tag: QOS
                     - tag: '{#INTERFACE}'
                     - tag: '{#QOS_IF_DIRECTION}'
+            - uuid: ab30b3bd5638418a8db57a2e5d89d856
+              name: '{#CLASS_NAME}: drop packets no buffer'
+              type: SNMP_AGENT
+              snmp_oid: 'get[.1.3.6.1.4.1.9.9.166.1.15.1.1.21.{#INDEX}]'
+              key: 'cisco.qos[{#INDEX},{#CLASS_NAME},drop_nobuffer]'
+              preprocessing:
+                - type: SIMPLE_CHANGE
+                  parameters:
+                    - ''
+              tags:
+                - tag: Application
+                  value: '{#INTERFACE}.{#QOS_IF_DIRECTION}'
+                - tag: CISCO
+                - tag: QOS
+                - tag: '{#CLASS_NAME}'
+            - uuid: 46803ca1f2ac4650a96a91732658c8fa
+              name: '{#CLASS_NAME}: drop packets over flow'
+              type: SNMP_AGENT
+              snmp_oid: 'get[.1.3.6.1.4.1.9.9.166.1.15.1.1.12.{#INDEX}]'
+              key: 'cisco.qos[{#INDEX},{#CLASS_NAME},drop_overflow]'
+              preprocessing:
+                - type: SIMPLE_CHANGE
+                  parameters:
+                    - ''
+              tags:
+                - tag: Application
+                  value: '{#INTERFACE}.{#QOS_IF_DIRECTION}'
+                - tag: CISCO
+                - tag: QOS
+                - tag: '{#CLASS_NAME}'
             - uuid: 67769eb6ebb0463785fe1d48a459f451
               name: '{#CLASS_NAME}: packets'
               type: SNMP_AGENT
               snmp_oid: 'get[.1.3.6.1.4.1.9.9.166.1.15.1.1.3.{#INDEX}]'
               key: 'cisco.qos[{#INDEX},{#CLASS_NAME},packet]'
-              units: pps
               preprocessing:
                 - type: SIMPLE_CHANGE
                   parameters:
@@ -73,25 +101,6 @@ zabbix_export:
                 - type: CHANGE_PER_SECOND
                   parameters:
                     - ''
-              tags:
-                - tag: Application
-                  value: '{#INTERFACE}.{#QOS_IF_DIRECTION}'
-                - tag: CISCO
-                - tag: QOS
-                - tag: '{#CLASS_NAME}'
-            - uuid: 6fa0ab1b8d0249b9a6d09598b1c59cdf
-              name: '{#CLASS_NAME}: packets per sec'
-              type: DEPENDENT
-              key: 'cisco.qos[{#INDEX},{#CLASS_NAME},pps]'
-              delay: '0'
-              value_type: FLOAT
-              units: pps
-              preprocessing:
-                - type: CHANGE_PER_SECOND
-                  parameters:
-                    - ''
-              master_item:
-                key: 'cisco.qos[{#INDEX},{#CLASS_NAME},packet]'
               tags:
                 - tag: Application
                   value: '{#INTERFACE}.{#QOS_IF_DIRECTION}'
